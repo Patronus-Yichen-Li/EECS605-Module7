@@ -113,15 +113,15 @@ function App() {
         </form>
       </div>
       <div className="Output">
-        <h3 align="left" style="color: white;">Results</h3>
-        <h1 align="left" style="color: white;">Relation</h1>
-        <p align="left" style="color: white;">
+        <h3 align="left">Results</h3>
+        <h1 align="left">Relation</h1>
+        <p align="left">
           This chart reveals the relationship between stocks mentioned in "targets" above, with the same sort<br />
           Having the default (best) history investigation length of 120 trading days.
         </p>
         <p>{outputFileData}</p>
-        <h1 align="left" style="color: white;">Prediction</h1>
-        <p align="left" style="color: white;">
+        <h1 align="left">Prediction</h1>
+        <p align="left">
           This chart reveals the prediciton based on LSTM and LSTM with GreyRelationship calibration.<br />
           The prediciton part is set automatically 120 trading days after the querying day (today), 
           for the application currently using prediciton result from previous LSTM and calibration,
