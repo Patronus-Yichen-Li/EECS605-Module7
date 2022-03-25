@@ -76,13 +76,13 @@ function App() {
 
       // POST request error
       if (data.statusCode === 400) {
-        const outputErrorMessage = JSON.parse(data.errorMessage)['outputPredictionData'];
+        const outputErrorMessage = JSON.parse(data.errorMessage)['outputResultsData'];
         setOutputFileData(outputErrorMessage);
       }
 
       // POST request success
       else {
-        const outputBytesData = JSON.parse(data.body)['outputPredictionData'];
+        const outputBytesData = JSON.parse(data.body)['outputResultsData'];
         setOutputFileData(decodeFileBase64(outputBytesData));
       }
 
@@ -98,37 +98,14 @@ function App() {
   return (
     <div className="App">
       <div className="Input">
-        <h1 align="left">Stock Prediction</h1>
-        <h2 align="left">Name:Yichen Li, email:liyichen@umich.edu</h2>
-        <h1 align="left">Input</h1>
-        <p align="left">
-          Please input a .csv file with content as following:<br />
-          "attribute": open, low, high, close, volume<br />
-          "target": AMD, AMZN, GOOG, IBM, IT, JPM, NFLX, WAT, WM, ZION<br />
-        </p>
+        <h1>Input</h1>
         <form onSubmit={handleSubmit}>
-          <input type="file" accept=".csv" onChange={handleChange} />
+          <input type="file" accept=".png" onChange={handleChange} />
           <button type="submit" disabled={buttonDisable}>{buttonText}</button>
         </form>
       </div>
       <div className="Output">
-        <h1 align="left">Results</h1>
-        <h2 align="left">Relation</h2>
-        <p align="left">
-          This chart reveals the relationship between stocks mentioned in "targets" above, with the same sort<br />
-          Having the default (best) history investigation length of 120 trading days.
-        </p>
-        <p>{outputFileData}</p>
-        <h2 align="left">Prediction</h2>
-        <p align="left">
-          This chart reveals the prediciton based on LSTM and LSTM with GreyRelationship calibration.<br />
-          The prediciton part is set automatically 120 trading days after the querying day (today), 
-          for the application currently using prediciton result from previous LSTM and calibration,
-          so the longer the querying day is, the worse the prediction effect and accuracy will be. 
-          As the test goes on, I think 120 timestamp, that is, the prediction accuracy of 120 trading days, 
-          is acceptable.<br />
-          Here by showing the slice of the history (training) data and 120 days prediciton result.<br /> 
-        </p>
+        <h1>Results</h1>
         <p>{outputFileData}</p>
       </div>
     </div>
