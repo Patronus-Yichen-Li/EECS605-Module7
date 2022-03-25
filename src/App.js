@@ -11,6 +11,14 @@ const decodeFileBase64 = (base64String) => {
   );
 };
 
+function decodeImageBase64(dataurl, filename) {
+  var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+  while(n--){
+      u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, {type:mime});
+}
 
 function App() {
   const [inputFileData, setInputFileData] = React.useState(''); // represented as bytes data (string)
@@ -76,14 +84,16 @@ function App() {
 
       // POST request error
       if (data.statusCode === 400) {
-        const outputErrorMessage = JSON.parse(data.errorMessage)['outputResultsData'];
+        const outputErrorMessage = JSON.parse(data.errorMessage)['outputPredictionData'];
         setOutputFileData(outputErrorMessage);
       }
 
       // POST request success
       else {
-        const outputBytesData = JSON.parse(data.body)['outputResultsData'];
-        setOutputFileData(decodeFileBase64(outputBytesData));
+        const outputPredictionData = JSON.parse(data.body)['outputPredictionData'];
+        const outputRelationData = JSON.parse(data.body)['outputRelationData'];
+        setOutputFileData(decodeImageBase64(outputPredictionData, "prediction.png"));
+        setOutputFileData(decodeImageBase64(outputRelationData, "relation.png"));
       }
 
       // re-enable submit button
@@ -99,14 +109,34 @@ function App() {
     <div className="App">
       <div className="Input">
         <h1>Input</h1>
+        <p>
+          Please input a .csv file with content as following:<br />
+          "attribute": open, low, high, close, volume<br />
+          "target": AMD, AMZN, GOOG, IBM, IT, JPM, NFLX, WAT, WM, ZION<br />
+        </p>
         <form onSubmit={handleSubmit}>
-          <input type="file" accept=".csv" onChange={handleChange} />
+          <input type="file" accept=".png" onChange={handleChange} />
           <button type="submit" disabled={buttonDisable}>{buttonText}</button>
         </form>
       </div>
       <div className="Output">
-        <h1>Results</h1>
-        <p>{outputFileData}</p>
+        <h1>Relation</h1>
+        <p>
+          This chart reveals the relationship between the "targets" mentioned above<br />
+          with default investigating length of 120 trading days<br />
+        </p>
+        <p>{outputRelationData}</p>
+        <h1>Prediction</h1>
+        <p>
+          This chart reveals the prediciton based on LSTM and LSTM with GreyRelationship calibration.<br />
+          The prediciton part is set automatically 120 trading days after the querying day (today), 
+          for the application currently using prediciton result from previous LSTM and calibration,
+          so the longer the querying day is, the worse the prediction effect and accuracy will be. 
+          As the test goes on, I think 120 timestamp, that is, the prediction accuracy of 120 trading days, 
+          is acceptable.<br />
+          Here by showing the slice of the history (training) data and 120 days prediciton result.<br /> 
+        </p>
+        <p>{outputPredictionData}</p>
       </div>
     </div>
   );
