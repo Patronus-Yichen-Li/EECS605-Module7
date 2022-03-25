@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+<title>Awesome interesting stuff</title>
 
 // atob is deprecated but this function converts base64string to text string
 const decodeFileBase64 = (base64String) => {
@@ -11,14 +12,6 @@ const decodeFileBase64 = (base64String) => {
   );
 };
 
-function decodeImageBase64(dataurl, filename) {
-  var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-  while(n--){
-      u8arr[n] = bstr.charCodeAt(n);
-  }
-  return new File([u8arr], filename, {type:mime});
-}
 
 function App() {
   const [inputFileData, setInputFileData] = React.useState(''); // represented as bytes data (string)
@@ -84,16 +77,14 @@ function App() {
 
       // POST request error
       if (data.statusCode === 400) {
-        const outputErrorMessage = JSON.parse(data.errorMessage)['outputPredictionData'];
+        const outputErrorMessage = JSON.parse(data.errorMessage)['outputResultsData'];
         setOutputFileData(outputErrorMessage);
       }
 
       // POST request success
       else {
-        const outputPredictionData = JSON.parse(data.body)['outputPredictionData'];
-        const outputRelationData = JSON.parse(data.body)['outputRelationData'];
-        setOutputFileData(decodeImageBase64(outputPredictionData, "prediction.png"));
-        setOutputFileData(decodeImageBase64(outputRelationData, "relation.png"));
+        const outputBytesData = JSON.parse(data.body)['outputResultsData'];
+        setOutputFileData(decodeFileBase64(outputBytesData));
       }
 
       // re-enable submit button
@@ -108,6 +99,8 @@ function App() {
   return (
     <div className="App">
       <div className="Input">
+        <h1>Stock Prediction</h1>
+        <h2>Name:Yichen Li, email:liyichen@umich.edu</h2>
         <h1>Input</h1>
         <p>
           Please input a .csv file with content as following:<br />
@@ -115,17 +108,12 @@ function App() {
           "target": AMD, AMZN, GOOG, IBM, IT, JPM, NFLX, WAT, WM, ZION<br />
         </p>
         <form onSubmit={handleSubmit}>
-          <input type="file" accept=".png" onChange={handleChange} />
+          <input type="file" accept=".csv" onChange={handleChange} />
           <button type="submit" disabled={buttonDisable}>{buttonText}</button>
         </form>
       </div>
       <div className="Output">
-        <h1>Relation</h1>
-        <p>
-          This chart reveals the relationship between the "targets" mentioned above<br />
-          with default investigating length of 120 trading days<br />
-        </p>
-        <p>{outputRelationData}</p>
+        <h3>Results</h3>
         <h1>Prediction</h1>
         <p>
           This chart reveals the prediciton based on LSTM and LSTM with GreyRelationship calibration.<br />
@@ -136,7 +124,7 @@ function App() {
           is acceptable.<br />
           Here by showing the slice of the history (training) data and 120 days prediciton result.<br /> 
         </p>
-        <p>{outputPredictionData}</p>
+        <p>{outputFileData}</p>
       </div>
     </div>
   );
