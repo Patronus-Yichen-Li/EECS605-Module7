@@ -65,7 +65,7 @@ function App() {
 
     // make POST request
     console.log('making POST request...');
-    fetch('https://oh0ld9alb2.execute-api.us-east-1.amazonaws.com/prod', {
+    fetch('<api-url>', {
       method: 'POST',
       headers: { "Content-Type": "application/json", "Accept": "text/plain" },
       body: JSON.stringify({ "image": inputFileData })
