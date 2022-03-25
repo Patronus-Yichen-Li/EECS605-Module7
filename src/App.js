@@ -77,7 +77,7 @@ function App() {
 
       // POST request error
       if (data.statusCode === 400) {
-        const outputErrorMessage = JSON.parse(data.errorMessage)['outputResultsData'];
+        const outputErrorMessage = JSON.parse(data.errorMessage)['outputPredictionData'];
         setOutputFileData(outputErrorMessage);
       }
 
@@ -99,10 +99,10 @@ function App() {
   return (
     <div className="App">
       <div className="Input">
-        <h1 align="left">Stock Prediction</h1>
-        <h2 align="left">Name:Yichen Li, email:liyichen@umich.edu</h2>
-        <h1 align="left">Input</h1>
-        <p align="left">
+        <h1 align="left" color="white">Stock Prediction</h1>
+        <h2 align="left" color="white">Name:Yichen Li, email:liyichen@umich.edu</h2>
+        <h1 align="left" color="white">Input</h1>
+        <p align="left" color="white">
           Please input a .csv file with content as following:<br />
           "attribute": open, low, high, close, volume<br />
           "target": AMD, AMZN, GOOG, IBM, IT, JPM, NFLX, WAT, WM, ZION<br />
@@ -113,9 +113,15 @@ function App() {
         </form>
       </div>
       <div className="Output">
-        <h3 align="left">Results</h3>
-        <h1 align="left">Prediction</h1>
-        <p align="left">
+        <h3 align="left" color="white">Results</h3>
+        <h1 align="left" color="white">Relation</h1>
+        <p align="left" color="white">
+          This chart reveals the relationship between stocks mentioned in "targets" above, with the same sort<br />
+          Having the default (best) history investigation length of 120 trading days.
+        </p>
+        <p>{outputFileData}</p>
+        <h1 align="left" color="white">Prediction</h1>
+        <p align="left" color="white">
           This chart reveals the prediciton based on LSTM and LSTM with GreyRelationship calibration.<br />
           The prediciton part is set automatically 120 trading days after the querying day (today), 
           for the application currently using prediciton result from previous LSTM and calibration,
