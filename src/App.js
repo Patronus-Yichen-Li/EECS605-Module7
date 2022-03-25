@@ -86,8 +86,8 @@ function App() {
 
       // POST request success
       else {
-        const outputBytesData = JSON.parse(data.body)['outputResultsData'];
-        setOutputFileData(decodeFileBase64(outputBytesData)); 
+        // const outputBytesData = JSON.parse(data.body)['outputResultsData'];
+        // setOutputFileData(decodeFileBase64(outputBytesData)); 
         let predictionData = JSON.parse(data.body)['outputPredicitionData'];
         predictionData = "data:image/png;base64,".concat(predictionData);
         setPredictionData(predictionData);
