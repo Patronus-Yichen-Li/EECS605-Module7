@@ -99,10 +99,10 @@ function App() {
   return (
     <div className="App">
       <div className="Input">
-        <h1 align="left" style="color: white;">Stock Prediction</h1>
-        <h2 align="left" style="color: white;">Name:Yichen Li, email:liyichen@umich.edu</h2>
-        <h1 align="left" style="color: white;">Input</h1>
-        <p align="left" style="color: white;">
+        <h1 align="left">Stock Prediction</h1>
+        <h2 align="left">Name:Yichen Li, email:liyichen@umich.edu</h2>
+        <h1 align="left">Input</h1>
+        <p align="left">
           Please input a .csv file with content as following:<br />
           "attribute": open, low, high, close, volume<br />
           "target": AMD, AMZN, GOOG, IBM, IT, JPM, NFLX, WAT, WM, ZION<br />
