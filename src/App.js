@@ -77,7 +77,7 @@ function App() {
 
       // POST request error
       if (data.statusCode === 400) {
-        const outputErrorMessage = JSON.parse(data.errorMessage)['outputResultsData'];
+        const outputErrorMessage = JSON.parse(data.errorMessage)['outputPredictionData'];
         setOutputFileData(outputErrorMessage);
       }
 
