@@ -102,7 +102,7 @@ function App() {
         <h1>Stock Prediction</h1>
         <h2>Name:Yichen Li, email:liyichen@umich.edu</h2>
         <h1>Input</h1>
-        <p>
+        <p align="left">
           Please input a .csv file with content as following:<br />
           "attribute": open, low, high, close, volume<br />
           "target": AMD, AMZN, GOOG, IBM, IT, JPM, NFLX, WAT, WM, ZION<br />
@@ -115,7 +115,7 @@ function App() {
       <div className="Output">
         <h3>Results</h3>
         <h1>Prediction</h1>
-        <p>
+        <p align="left">
           This chart reveals the prediciton based on LSTM and LSTM with GreyRelationship calibration.<br />
           The prediciton part is set automatically 120 trading days after the querying day (today), 
           for the application currently using prediciton result from previous LSTM and calibration,
