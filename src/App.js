@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react';
-<title>Awesome interesting stuff</title>
 
 // atob is deprecated but this function converts base64string to text string
 const decodeFileBase64 = (base64String) => {
@@ -66,7 +65,7 @@ function App() {
 
     // make POST request
     console.log('making POST request...');
-    fetch('https://abp8xl8hnk.execute-api.us-east-1.amazonaws.com/prod/', {
+    fetch('https://oh0ld9alb2.execute-api.us-east-1.amazonaws.com/prod/', {
       method: 'POST',
       headers: { "Content-Type": "application/json", "Accept": "text/plain" },
       body: JSON.stringify({ "image": inputFileData })
