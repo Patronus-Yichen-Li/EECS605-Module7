@@ -66,7 +66,7 @@ function App() {
 
     // make POST request
     console.log('making POST request...');
-    fetch('https://oh0ld9alb2.execute-api.us-east-1.amazonaws.com/prod', {
+    fetch('https://abp8xl8hnk.execute-api.us-east-1.amazonaws.com/prod/', {
       method: 'POST',
       headers: { "Content-Type": "application/json", "Accept": "text/plain" },
       body: JSON.stringify({ "image": inputFileData })
@@ -113,14 +113,14 @@ function App() {
         </form>
       </div>
       <div className="Output">
-        <h3 align="left">Results</h3>
-        <h1 align="left">Relation</h1>
+        <h1 align="left">Results</h1>
+        <h2 align="left">Relation</h2>
         <p align="left">
           This chart reveals the relationship between stocks mentioned in "targets" above, with the same sort<br />
           Having the default (best) history investigation length of 120 trading days.
         </p>
         <p>{outputFileData}</p>
-        <h1 align="left">Prediction</h1>
+        <h2 align="left">Prediction</h2>
         <p align="left">
           This chart reveals the prediciton based on LSTM and LSTM with GreyRelationship calibration.<br />
           The prediciton part is set automatically 120 trading days after the querying day (today), 
