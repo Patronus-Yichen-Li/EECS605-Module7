@@ -77,13 +77,13 @@ function App() {
 
       // POST request error
       if (data.statusCode === 400) {
-        const outputErrorMessage = JSON.parse(data.errorMessage)['outputPredictionData'];
+        const outputErrorMessage = JSON.parse(data.errorMessage)['outputResultsData'];
         setOutputFileData(outputErrorMessage);
       }
 
       // POST request success
       else {
-        const outputBytesData = JSON.parse(data.body)['outputResultsData'];
+        const outputBytesData = JSON.parse(data.body)['outputPredictionData'];
         setOutputFileData(decodeFileBase64(outputBytesData));
       }
 
@@ -99,9 +99,9 @@ function App() {
   return (
     <div className="App">
       <div className="Input">
-        <h1>Stock Prediction</h1>
-        <h2>Name:Yichen Li, email:liyichen@umich.edu</h2>
-        <h1>Input</h1>
+        <h1 align="left">Stock Prediction</h1>
+        <h2 align="left">Name:Yichen Li, email:liyichen@umich.edu</h2>
+        <h1 align="left">Input</h1>
         <p align="left">
           Please input a .csv file with content as following:<br />
           "attribute": open, low, high, close, volume<br />
@@ -113,8 +113,8 @@ function App() {
         </form>
       </div>
       <div className="Output">
-        <h3>Results</h3>
-        <h1>Prediction</h1>
+        <h3 align="left">Results</h3>
+        <h1 align="left">Prediction</h1>
         <p align="left">
           This chart reveals the prediciton based on LSTM and LSTM with GreyRelationship calibration.<br />
           The prediciton part is set automatically 120 trading days after the querying day (today), 
