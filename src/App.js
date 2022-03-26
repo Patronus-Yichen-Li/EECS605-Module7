@@ -86,12 +86,10 @@ function App() {
 
       // POST request success
       else {
-        // const outputBytesData = JSON.parse(data.body)['outputResultsData'];
-        // setOutputFileData(decodeFileBase64(outputBytesData)); 
-        let predictionData = JSON.parse(data.body)['outputPredicitionData'];
+        let predictionData = JSON.parse(data.body)['outputPredictionData'];
         predictionData = "data:image/png;base64,".concat(predictionData);
         setPredictionData(predictionData);
-        let relationData = JSON.parse(data.body)['outputRelationionData'];
+        let relationData = JSON.parse(data.body)['outputRelationData'];
         relationData = "data:image/png;base64,".concat(relationData);
         setRelationData(relationData);
       }
